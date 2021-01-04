@@ -1,0 +1,2 @@
+bundles:
+  - { name: VigoKrumins\OroCompanyBundle\OroCompanyBundle, priority: 250 }

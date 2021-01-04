@@ -1,0 +1,77 @@
+datagrids:
+  vigokrumins-orocompany-employee-grid:
+    extended_entity_name: "%vigokrumins.orocompany.entity.employee.class%"
+    acl_resource: vigokrumins_orocompany_employee_view
+    source:
+      type: orm
+      query:
+        select:
+          - employee.id
+          - employee.firstName
+          - employee.lastName
+          - IDENTITY(employee.company) as company
+          - com.name as companyName
+          - employee.createdAt
+          - employee.updatedAt
+        from:
+          - { table: "%vigokrumins.orocompany.entity.employee.class%", alias: employee }
+        join:
+          left:
+            company:
+              join: employee.company
+              alias: com
+    columns:
+      id:
+        label: 'vigokrumins.orocompany.employee.id.label'
+      firstName:
+        frontend_type: string
+        label: 'vigokrumins.orocompany.employee.first_name.label'
+      lastName:
+        frontend_type: string
+        label: 'vigokrumins.orocompany.employee.last_name.label'
+      companyName:
+        frontend_type: string
+        label: 'vigokrumins.orocompany.employee.company_name.label'
+      createdAt:
+        frontend_type: date
+        label: 'vigokrumins.orocompany.employee.created_at.label'
+      updatedAt:
+        frontend_type: date
+        label: 'vigokrumins.orocompany.employee.updated_at.label'
+    properties:
+      id: ~
+      view_link:
+        type: url
+        route: vigokrumins_orocompany_employee_view
+        params: [ id ]
+      update_link:
+        type: url
+        route: vigokrumins_orocompany_employee_update
+        params: [ id ]
+      delete_link:
+        type: url
+        route: vigokrumins_orocompany_employee_delete
+        params: [ id ]
+    actions:
+      view:
+        type: navigate
+        label: oro.grid.action.view
+        icon: eye
+        link: view_link
+        rowAction: true
+      update:
+        type: navigate
+        label: oro.grid.action.update
+        icon: edit
+        link: update_link
+        rowAction: true
+
+  vigokrumins-orocompany-company-employee-grid:
+    extends: vigokrumins-orocompany-employee-grid
+    source:
+      query:
+        where:
+          and:
+            - com.id = :company
+      bind_parameters:
+        - company

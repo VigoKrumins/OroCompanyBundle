@@ -1,0 +1,18 @@
+parameters:
+  vigokrumins.orocompany.entity.company.class: VigoKrumins\OroCompanyBundle\Entity\Company
+  vigokrumins.orocompany.entity.employee.class: VigoKrumins\OroCompanyBundle\Entity\Employee
+
+services:
+  _defaults:
+    public: false
+    autowire: true
+    autoconfigure: true
+
+  VigoKrumins\OroCompanyBundle\:
+    resource: '../../*'
+    exclude: '../../{DependencyInjection,Entity,Migrations,Model,Resources,OroCompanyBundle.php}'
+
+  VigoKrumins\OroCompanyBundle\Controller\:
+    public: true
+    resource: '../../Controller'
+    tags: ['controller.service_arguments']

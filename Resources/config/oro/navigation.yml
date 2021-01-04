@@ -1,0 +1,25 @@
+navigation:
+  menu_config:
+    items:
+      vigokrumins_orocompany_tab:
+        uri: '#'
+        label: 'vigokrumins.orocompany.tab'
+        extras:
+          icon: fa-building
+      vigokrumins_orocompany_company_tab:
+        label: 'vigokrumins.orocompany.company.entity_label'
+        route: 'vigokrumins_orocompany_company_index'
+      vigokrumins_orocompany_employee_tab:
+        label: 'vigokrumins.orocompany.employee.entity_label'
+        route: 'vigokrumins_orocompany_employee_index'
+    tree:
+      application_menu:
+        children:
+          vigokrumins_orocompany_tab:
+            children:
+              vigokrumins_orocompany_company_tab: ~
+              vigokrumins_orocompany_employee_tab: ~
+
+  titles:
+    vigokrumins_orocompany_company_index: ~
+    vigokrumins_orocompany_employee_index: ~

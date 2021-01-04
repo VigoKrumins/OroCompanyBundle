@@ -1,0 +1,4 @@
+vigokrumins_orocompany_company_bundle:
+  resource:   "@OroCompanyBundle/Controller/"
+  type:       annotation
+  prefix:      /company

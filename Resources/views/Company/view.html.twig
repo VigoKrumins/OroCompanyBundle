@@ -1,0 +1,66 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% oro_title_set({params: {"%entity.name%": entity.name|default('N/A'|trans)}}) %}
+
+{% block navButtons %}
+    {% import 'OroUIBundle::macros.html.twig' as UI %}
+
+    {% placeholder view_navButtons with {entity: entity} %}
+    {% if is_granted('EDIT', entity) %}
+        {{ UI.editButton({
+            'path': path('vigokrumins_orocompany_company_update', { id: entity.id }),
+            'entity_label': 'vigokrumins.orocompany.company.entity_label'|trans
+        }) }}
+    {% endif %}
+{% endblock navButtons %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+        'entity': entity,
+        'indexPath': path('vigokrumins_orocompany_company_index'),
+        'indexLabel': 'vigokrumins.orocompany.company.entity_plural_label'|trans,
+        'entityTitle': entity.name|default('N/A'),
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {% import 'OroUIBundle::macros.html.twig' as UI %}
+
+    {%- set companyInformation -%}
+        <div class="row-fluid form-horizontal">
+            <div class="responsive-block">
+                {{ UI.renderProperty('vigokrumins.orocompany.company.name.label'|trans, entity.name) }}
+            </div>
+            <div class="responsive-block">
+                {{ entityConfig.renderDynamicFields(entity) }}
+            </div>
+        </div>
+    {%- endset -%}
+
+    {%- set companyEmployees -%}
+        {{ oro_widget_render({
+            'widgetType': 'block',
+            'alias': 'vigokrumins-orocompany-company-employee-widget',
+            'wid': 'vigokrumins-orocompany-company-employee-widget',
+            'title': 'vigokrumins.orocompany.employee.entity_plural_label'|trans,
+            'url': path('vigokrumins_orocompany_company_widget_employees', {id: entity.id})
+        }) }}
+    {%- endset  -%}
+
+    {% set dataBlocks = [{
+        'title': 'General Information'|trans,
+        'subblocks': [{
+            'data': [companyInformation]
+        }, {
+            'data': [companyEmployees]
+        }]
+    }] %}
+
+    {% set id = 'company-detail-view' %}
+    {% set data = { 'dataBlocks': dataBlocks } %}
+
+    {{ parent() }}
+{% endblock content_data %}

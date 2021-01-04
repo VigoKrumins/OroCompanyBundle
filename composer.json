@@ -1,0 +1,36 @@
+{
+    "name": "vigokrumins/oro-company-bundle",
+    "type": "symfony-bundle",
+    "description": "Oro Company Bundle",
+    "homepage": "https://github.com/VigoKrumins/OroCompanyBundle.git",
+    "keywords": ["Oro", "Company"],
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Vigo Krumins",
+            "homepage": "https://www.vigokrumins.me",
+            "email": "hello@vigokrumins.me"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "oro/platform": "4.2.*"
+    },
+    "autoload": {
+        "psr-4": { "VigoKrumins\\Bundle\\CompanyBundle": "" },
+        "exclude-from-classmap": ["/Tests/"]
+    },
+    "repositories": {
+        "oro": {
+            "type": "composer",
+            "url": "https://packagist.orocrm.com"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.2-dev"
+        }
+    }
+}

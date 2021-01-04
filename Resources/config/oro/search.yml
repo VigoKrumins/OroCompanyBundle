@@ -1,0 +1,14 @@
+search:
+  VigoKrumins\OroCompanyBundle\Entity\Company:
+    alias: vigokrumins_orocompany_company
+    label: vigokrumins.orocompany.company.entity_label
+    search_template: VigoKruminsOroCompanyBundle:Company:searchResult.html.twig
+    route:
+      name: vigokrumins_orocompany_company_view
+      parameters:
+        id: id
+    fields:
+      -
+        name: name
+        target_type: text
+        target_fields: [name]

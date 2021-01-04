@@ -1,0 +1,55 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% oro_title_set({ params: {"%entity.fullName%": entity.fullName|default('N/A'|trans)} }) %}
+
+{% block navButtons %}
+    {% import 'OroUIBundle::macros.html.twig' as UI %}
+
+    {% placeholder view_navButtons with {entity: entity} %}
+    {% if is_granted('EDIT', entity) %}
+        {{ UI.editButton({
+            'path': path('vigokrumins_orocompany_employee_update', { id: entity.id }),
+            'entity_label': 'vigokrumins.orocompany.employee.entity_label'|trans
+        }) }}
+    {% endif %}
+{% endblock navButtons %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+        'entity': entity,
+        'indexPath': path('vigokrumins_orocompany_employee_index'),
+        'indexLabel': 'vigokrumins.orocompany.employee.entity_plural_label'|trans,
+        'entityTitle': entity.fullName|default('N/A'),
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {% import 'OroUIBundle::macros.html.twig' as UI %}
+
+    {%- set employeeInformation -%}
+        <div class="row-fluid form-horizontal">
+            <div class="responsive-block">
+                {{ UI.renderProperty('vigokrumins.orocompany.employee.first_name.label'|trans, entity.firstName) }}
+                {{ UI.renderProperty('vigokrumins.orocompany.employee.last_name.label'|trans, entity.lastName) }}
+            </div>
+            <div class="responsive-block">
+                {{ entityConfig.renderDynamicFields(entity) }}
+            </div>
+        </div>
+    {%- endset -%}
+
+    {% set dataBlocks = [{
+        'title': 'General Information'|trans,
+        'subblocks': [{
+            'data': [employeeInformation]
+        }]
+    }] %}
+
+    {% set id = 'employee-detail-view' %}
+    {% set data = { 'dataBlocks': dataBlocks } %}
+
+    {{ parent() }}
+{% endblock content_data %}

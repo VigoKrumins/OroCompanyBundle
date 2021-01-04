@@ -1,0 +1,43 @@
+vigokrumins:
+  orocompany:
+    tab: 'Companies'
+
+    company:
+      entity_label: 'Company'
+      entity_plural_label: 'Companies'
+      entity_grid_all_view_label: 'All %entity_plural_label%'
+
+      form:
+        placeholder.choose: 'Choose Company'
+
+      id.label: 'ID'
+      name.label: 'Name'
+      created_at.label: 'Created At'
+      updated_at.label: 'Updated At'
+
+      saved_message: 'Company saved successfully'
+
+    employee:
+      entity_label: 'Employee'
+      entity_plural_label: 'Employees'
+      entity_grid_all_view_label: 'All %entity_plural_label%'
+
+      id:
+        label: 'ID'
+
+      company_name:
+        label: 'Company Name'
+
+      first_name:
+        label: 'First Name'
+
+      last_name:
+        label: 'Last Name'
+
+      created_at:
+        label: 'Created At'
+
+      updated_at:
+        label: 'Updated At'
+
+      saved_message: 'Employee saved successfully'

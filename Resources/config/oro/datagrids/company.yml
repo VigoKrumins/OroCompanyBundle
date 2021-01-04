@@ -1,0 +1,75 @@
+datagrids:
+  vigokrumins-orocompany-company-grid:
+    extended_entity_name: "%vigokrumins.orocompany.entity.company.class%"
+    acl_resource: vigokrumins_orocompany_company_view
+    source:
+      type: orm
+      query:
+        select:
+          - company.id
+          - company.name
+          - company.createdAt
+          - company.updatedAt
+        from:
+          - { table: "%vigokrumins.orocompany.entity.company.class%", alias: company }
+    inline_editing:
+      enable: true
+    columns:
+      name:
+        frontend_type: string
+        label: vigokrumins.orocompany.company.name.label
+      createdAt:
+        frontend_type: date
+        label: vigokrumins.orocompany.company.created_at.label
+      updatedAt:
+        frontend_type: date
+        label: vigokrumins.orocompany.company.updated_at.label
+      tags: []
+    sorters:
+      columns:
+        name:
+          data_name: company.name
+        createdAt:
+          data_name: company.createdAt
+        updatedAt:
+          data_name: company.updatedAt
+      default:
+        name: ASC
+    properties:
+      id: ~
+      view_link:
+        type: url
+        route: vigokrumins_orocompany_company_view
+        params: [ id ]
+      update_link:
+        type: url
+        route: vigokrumins_orocompany_company_update
+        params: [ id ]
+      delete_link:
+        type: url
+        route: vigokrumins_orocompany_company_delete
+        params: [ id ]
+    actions:
+      view:
+        type: navigate
+        label: oro.grid.action.view
+        icon: eye
+        link: view_link
+        rowAction: true
+      update:
+        type: navigate
+        label: oro.grid.action.update
+        icon: edit
+        link: update_link
+        rowAction: true
+      delete:
+        type: delete
+        acl_resource: vigokrumins_orocompany_company_delete
+        label: oro.grid.action.delete
+        icon: trash
+        link: delete_link
+
+    options:
+      entity_pagination: true
+      contexts:
+        enabled: true

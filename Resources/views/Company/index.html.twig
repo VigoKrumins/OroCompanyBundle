@@ -1,0 +1,16 @@
+{% extends 'OroUIBundle:actions:index.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% set gridName = 'vigokrumins-orocompany-company-grid' %}
+{% set pageTitle = 'vigokrumins.orocompany.company.entity_label'|trans %}
+
+{% block navButtons %}
+    {% import 'OroUIBundle::macros.html.twig' as UI %}
+
+    {% if is_granted('vigokrumins_orocompany_company_create') %}
+        {{ UI.addButton({
+            'path': path('vigokrumins_orocompany_company_create'),
+            'entity_label': 'vigokrumins.orocompany.company.entity_label'|trans,
+        }) }}
+    {% endif %}
+{% endblock navButtons %}

@@ -1,0 +1,64 @@
+{% extends 'OroUIBundle:actions:update.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% oro_title_set({ params: { "%entity.firstName%": entity.firstName, "%entityName%": 'vigokrumins.orocompany.employee.entity_label'|trans } }) %}
+{% set entityId = entity.id %}
+
+{% block navButtons %}
+    {% import 'OroUIBundle::macros.html.twig' as UI %}
+
+    {% set html = UI.saveAndCloseButton({
+        'route': 'vigokrumins_orocompany_employee_view',
+        'params': {'id': '$id'}
+    }) %}
+
+    {{ UI.dropdownSaveButton({'html': html}) }}
+    {{ UI.cancelButton(path('vigokrumins_orocompany_employee_index')) }}
+{% endblock navButtons %}
+
+{% block pageHeader %}
+    {% if entityId %}
+        {% set breadcrumbs = {
+            'entity': entity,
+            'indexPath': path('vigokrumins_orocompany_employee_index'),
+            'indexLabel': 'vigokrumins.orocompany.employee.entity_plural_label'|trans,
+            'entityTitle': entity.firstName
+        } %}
+        {{ parent() }}
+    {% else %}
+        {% set title = 'oro.ui.create_entity'|trans({'%entityName%': 'vigokrumins.orocompany.employee.entity_label'|trans}) %}
+        {% include 'OroUIBundle::page_title_block.html.twig' with {title: title} %}
+    {% endif %}
+{% endblock pageHeader %}
+
+{% block breadcrumbs %}
+    {% import 'OroUIBundle::macros.html.twig' as UI %}
+
+    {{ parent() }}
+{% endblock breadcrumbs %}
+
+{% block content_data %}
+    {% set id = 'employee-form' %}
+
+    {% set dataBlocks = [{
+        'title': 'General Information'|trans,
+        'subblocks': [
+            {
+                'title': '',
+                'data': [
+                    form_row(form.firstName),
+                    form_row(form.lastName),
+                    form_row(form.company)
+                ]
+            }]
+    }] %}
+
+    {% set dataBlocks = dataBlocks|merge(oro_form_additional_data(form, 'Additional'|trans)) %}
+
+    {% set data = {
+        'formErrors': form_errors(form) ? form_errors(form) : null,
+        'dataBlocks': dataBlocks,
+    } %}
+
+    {{ parent() }}
+{% endblock content_data %}

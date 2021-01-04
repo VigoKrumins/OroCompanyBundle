@@ -1,0 +1,6 @@
+services:
+  VigoKrumins\OroCompanyBundle\Form\AutocompleteHandler\CompanySearchHandler:
+    parent: oro_form.autocomplete.search_handler
+    public: true
+    tags:
+      - { name: oro_form.autocomplete.search_handler, alias: vigokrumins_orocompany_company, acl_resource: vigokrumins_orocompany_company_view }
