@@ -17,7 +17,7 @@
         "oro/platform": "4.1.*"
     },
     "autoload": {
-        "psr-4": { "VigoKrumins\\OroCompanyBundle": "" },
+        "psr-4": { "VigoKrumins\\OroCompanyBundle\\": "" },
         "exclude-from-classmap": ["/Tests/"]
     },
     "repositories": {
